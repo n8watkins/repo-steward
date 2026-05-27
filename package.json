@@ -1,0 +1,17 @@
+{
+  "name": "repo-steward",
+  "version": "0.1.0",
+  "description": "A free, deterministic GitHub Actions repo-maintenance bot. No LLMs, no API credits.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "steward:health": "tsx src/run-health.ts",
+    "steward:pr": "tsx src/run-pr-check.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
