@@ -7,7 +7,9 @@
   "scripts": {
     "steward:health": "tsx src/run-health.ts",
     "steward:pr": "tsx src/run-pr-check.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "npm run typecheck",
+    "test": "npm run typecheck"
   },
   "devDependencies": {
     "@types/node": "^22.15.3",
