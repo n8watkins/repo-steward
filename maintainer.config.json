@@ -61,7 +61,11 @@
     "NODE_ENV",
     "VERCEL",
     "VERCEL_ENV",
-    "CI"
+    "CI",
+    "GITHUB_TOKEN",
+    "GITHUB_REPOSITORY",
+    "PR_NUMBER",
+    "BASE_REF"
   ],
   "aiProviderKeywords": [
     "openai",
