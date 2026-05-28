@@ -71,13 +71,29 @@ export function walkFiles(startDirs: string[], config: MaintainerConfig): string
   return Array.from(new Set(results)).sort();
 }
 
-export function globToRegex(pattern: string): RegExp {
-  const normalized = normalizePath(pattern)
-    .replace(/[.+^${}()|[\]\\]/g, "\\$&")
-    .replace(/\\\*\\\*/g, ".*")
-    .replace(/\\\*/g, "[^/]*");
+function escapeRegexChar(char: string): string {
+  return /[.+^${}()|[\]\\]/.test(char) ? "\\" + char : char;
+}
 
-  return new RegExp("^" + normalized + "$");
+export function globToRegex(pattern: string): RegExp {
+  const normalized = normalizePath(pattern);
+  let regex = "";
+
+  for (let index = 0; index < normalized.length; index += 1) {
+    const char = normalized[index];
+    const nextChar = normalized[index + 1];
+
+    if (char === "*" && nextChar === "*") {
+      regex += ".*";
+      index += 1;
+    } else if (char === "*") {
+      regex += "[^/]*";
+    } else {
+      regex += escapeRegexChar(char);
+    }
+  }
+
+  return new RegExp("^" + regex + "$");
 }
 
 export function matchesAny(path: string, patterns: string[]): boolean {
